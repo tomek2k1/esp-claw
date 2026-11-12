@@ -1,0 +1,5 @@
+board: freenove_fnk0104b
+chip: esp32s3
+version: 1.0.0
+description: "Freenove FNK0104B 2.8-inch ILI9341 capacitive touch display"
+manufacturer: "FREENOVE"

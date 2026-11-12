@@ -22,6 +22,31 @@ ESP-Claw 需要至少 8MB Flash 和 8MB PSRAM。
 
 请见 <LinkToSource relativePath="application/edge_agent/boards/" />。
 
+### Freenove FNK0104B
+
+`freenove_fnk0104b` 配置面向配有 16MB Flash、8MB 八线 PSRAM、2.8 英寸 ILI9341 显示屏和 FT6336U 电容触摸的 ESP32-S3 开发板。它提供 240×320 竖屏显示、触摸输入和 PWM 亮度控制。此配置未启用音频和 microSD。FNK0104A、FNK0104N 和 FNK0104S 是不同型号。
+
+| 功能 | GPIO / 设置 |
+| --- | --- |
+| LCD MOSI / MISO / SCLK | 11 / 13 / 12 |
+| LCD CS / DC / 复位 | 10 / 46 / 开发板复位 |
+| 背光 | 45，高电平有效 |
+| 触摸 SDA / SCL | 16 / 15 |
+| 触摸复位 / 中断 | 18 / 17 |
+| 触摸 I2C 地址 | 0x38（Board Manager：0x70） |
+
+导出 ESP-IDF v5.5.4 环境后，在 `application/edge_agent` 目录执行：
+
+```bash
+idf.py bmgr -c ./boards -b freenove_fnk0104b
+idf.py build
+idf.py flash monitor
+```
+
+此适配仍需完成固件编译和 FNK0104B 实机验证。烧录后，请检查启动器是否铺满屏幕、红绿蓝颜色是否正确、四角触摸和松手是否正常，以及重启前后亮度调整是否正常。
+
+硬件参考：[Freenove 参考仓库](https://github.com/Freenove/Freenove_ESP32_S3_Display)、其中的 `Libraries/FNK0104AB/TFT_eSPI_Setups_v1.3.zip` 显示配置和 `Tutorial_With_Touch/Sketches/Sketch_11.1_Touch` 触摸示例。
+
 <Aside title="需要适配新的开发板？" type="tip">
     ESP-Claw 使用 ESP Board Manager 适配多种开发板。
 

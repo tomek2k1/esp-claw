@@ -22,6 +22,31 @@ Currently supported:
 
 See <LinkToSource relativePath="application/edge_agent/boards/" />.
 
+### Freenove FNK0104B
+
+The `freenove_fnk0104b` profile targets the ESP32-S3 board with 16MB Flash, 8MB octal PSRAM, a 2.8-inch ILI9341 display and FT6336U capacitive touch. It provides a 240×320 portrait display, touch input and PWM brightness control. Audio and microSD are not configured by this profile. FNK0104A, FNK0104N and FNK0104S are different variants.
+
+| Function | GPIO / setting |
+| --- | --- |
+| LCD MOSI / MISO / SCLK | 11 / 13 / 12 |
+| LCD CS / DC / reset | 10 / 46 / board reset |
+| Backlight | 45, active high |
+| Touch SDA / SCL | 16 / 15 |
+| Touch reset / interrupt | 18 / 17 |
+| Touch I2C address | 0x38 (Board Manager: 0x70) |
+
+From `application/edge_agent`, with ESP-IDF v5.5.4 exported:
+
+```bash
+idf.py bmgr -c ./boards -b freenove_fnk0104b
+idf.py build
+idf.py flash monitor
+```
+
+This adaptation still requires a firmware build and validation on a physical FNK0104B. After flashing, check that the launcher fills the screen, red/green/blue colors are correct, touches track all four corners and release correctly, and brightness changes work before and after a restart.
+
+Hardware references: [Freenove reference repository](https://github.com/Freenove/Freenove_ESP32_S3_Display), its `Libraries/FNK0104AB/TFT_eSPI_Setups_v1.3.zip` display setup and `Tutorial_With_Touch/Sketches/Sketch_11.1_Touch` touch example.
+
 <Aside title="Need to adapt a new development board?" type="tip">
     ESP-Claw uses ESP Board Manager to support multiple development boards.
 

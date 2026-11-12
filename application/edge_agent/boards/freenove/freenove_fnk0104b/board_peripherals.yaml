@@ -1,0 +1,32 @@
+version: 1.0.0
+peripherals:
+  - name: spi_display
+    type: spi
+    role: master
+    config:
+      spi_bus_config:
+        spi_port: SPI2_HOST
+        data0_io_num: 11
+        data1_io_num: 13
+        sclk_io_num: 12
+        # One RGB565 frame; also accommodates the display service's DMA strips.
+        max_transfer_sz: 153600
+
+  - name: i2c_master
+    type: i2c
+    role: master
+    config:
+      port: 0
+      pins:
+        sda: 16
+        scl: 15
+
+  - name: ledc_backlight
+    type: ledc
+    role: none
+    config:
+      gpio_num: 45
+      freq_hz: 5000
+      duty: 0
+      duty_resolution: LEDC_TIMER_10_BIT
+      output_invert: false
